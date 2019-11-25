@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel ="stylesheet" href="/background.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">CraigsList of Jobs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/add">Job Entry <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button type="submit" class="btn btn-danger">Search</button>
+        </form>
+    </div>
+</nav>
+
+<h2>A site for all your basic job needs!</h2>
+<h3>Please fill out the following form</h3>
+<form action="/add" th:action="@{/process}" th:object="${job}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{jobshot}" />
+    Title: <input type="text" th:field="*{title}" />
+    <span th:if="${#fields.hasErrors('title')}"
+          th:errors="*{title}"></span><br />
+    Description: <input type="text" th:field="*{description}" />
+    <span th:if="${#fields.hasErrors('description')}"
+          th:errors="*{description}"></span><br />
+    Posted Date: <input type="text" th:field="*{postedDate}" />
+    <span th:if="${#fields.hasErrors('postedDate')}"
+          th:errors="*{postedDate}"></span><br />
+    Author: <input type="text" th:field="*{author}" />
+    <span th:if="${#fields.hasErrors('author')}"
+          th:errors="*{author}"></span><br />
+    Phone: <input type="text" th:field="*{phone}" />
+    <span th:if="${#fields.hasErrors('phone')}"
+          th:errors="*{phone}"></span><br />
+    Image : <input type="file" name="file"><br/><br/>
+    <div th:if="${job.jobshot} !=null">
+        <img th:src="${job.jobshot}">
+    </div>
+    <input type="submit" value="Submit" />
+</form>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
